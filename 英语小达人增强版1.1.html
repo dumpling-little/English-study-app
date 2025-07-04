@@ -1,0 +1,1793 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>英语小达人增强版 - 沪教版二年级趣味学习</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Arial Rounded MT Bold', 'Helvetica Rounded', Arial, sans-serif;
+            -webkit-tap-highlight-color: transparent;
+        }
+        
+        body {
+            background: linear-gradient(135deg, #6ecbf5 0%, #e2f0fd 100%);
+            min-height: 100vh;
+            padding: 15px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            overflow-x: hidden;
+        }
+        
+        .container {
+            max-width: 800px;
+            width: 100%;
+            background-color: white;
+            border-radius: 20px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.15);
+            overflow: hidden;
+            position: relative;
+            margin-top: 10px;
+        }
+        
+        header {
+            background: linear-gradient(90deg, #ff6b6b 0%, #ff8e53 100%);
+            color: white;
+            padding: 15px 20px;
+            text-align: center;
+            position: relative;
+            border-bottom: 4px solid #ff4757;
+        }
+        
+        h1 {
+            font-size: 1.8rem;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.2);
+            margin-bottom: 5px;
+        }
+        
+        .subtitle {
+            font-size: 0.95rem;
+            opacity: 0.9;
+        }
+        
+        .unit-selector {
+            display: flex;
+            justify-content: center;
+            flex-wrap: wrap;
+            gap: 8px;
+            padding: 15px 10px;
+            background-color: #f8f9fa;
+            border-bottom: 2px solid #e9ecef;
+        }
+        
+        .unit-btn {
+            background: linear-gradient(135deg, #4facfe 0%, #00f2fe 100%);
+            color: white;
+            border: none;
+            border-radius: 50px;
+            padding: 10px 18px;
+            font-size: 0.95rem;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            font-weight: bold;
+            display: flex;
+            align-items: center;
+            gap: 5px;
+            flex: 1;
+            min-width: 100px;
+            max-width: 160px;
+            text-align: center;
+            justify-content: center;
+        }
+        
+        .unit-btn:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 6px 12px rgba(0, 0, 0, 0.15);
+        }
+        
+        .unit-btn.active {
+            background: linear-gradient(135deg, #ff9a9e 0%, #fad0c4 100%);
+            transform: scale(1.05);
+        }
+        
+        .game-area {
+            padding: 15px;
+            min-height: 400px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+        
+        .game-title {
+            font-size: 1.5rem;
+            color: #ff6b6b;
+            margin-bottom: 15px;
+            text-align: center;
+            padding: 0 10px;
+        }
+        
+        .game-mode-selector {
+            display: flex;
+            justify-content: center;
+            gap: 15px;
+            margin-bottom: 15px;
+            width: 100%;
+            flex-wrap: wrap;
+        }
+        
+        .mode-btn {
+            background: linear-gradient(135deg, #a1c4fd 0%, #c2e9fb 100%);
+            border: none;
+            border-radius: 30px;
+            padding: 10px 20px;
+            font-size: 1rem;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            color: #2c3e50;
+            font-weight: bold;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            flex: 1;
+            max-width: 150px;
+        }
+        
+        .mode-btn.active {
+            background: linear-gradient(135deg, #ffb347 0%, #ffcc33 100%);
+            transform: scale(1.05);
+        }
+        
+        .card-grid {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 12px;
+            width: 100%;
+            max-width: 600px;
+            margin: 0 auto;
+        }
+        
+        .card {
+            background: linear-gradient(135deg, #a1c4fd 0%, #c2e9fb 100%);
+            height: 90px;
+            border-radius: 12px;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 8px 16px rgba(0, 0, 0, 0.15);
+        }
+        
+        .card-icon {
+            font-size: 1.8rem;
+            margin-bottom: 6px;
+        }
+        
+        .card-text {
+            font-size: 1rem;
+            font-weight: bold;
+            color: #2c3e50;
+            text-align: center;
+            padding: 0 5px;
+        }
+        
+        .dialog-box {
+            background-color: #fff9c4;
+            border: 3px dashed #ffd54f;
+            border-radius: 15px;
+            padding: 15px;
+            margin: 15px auto;
+            max-width: 500px;
+            width: 95%;
+            position: relative;
+        }
+        
+        .dialog-text {
+            font-size: 1.2rem;
+            text-align: center;
+            margin-bottom: 12px;
+            color: #5d4037;
+            min-height: 50px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            line-height: 1.4;
+        }
+        
+        .answer-options {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 8px;
+            justify-content: center;
+            margin-top: 15px;
+        }
+        
+        .answer-btn {
+            background: linear-gradient(135deg, #ffb347 0%, #ffcc33 100%);
+            border: none;
+            border-radius: 30px;
+            padding: 10px 15px;
+            font-size: 0.95rem;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            color: #5d4037;
+            font-weight: bold;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            flex: 1;
+            min-width: 120px;
+            max-width: 200px;
+        }
+        
+        .answer-btn:hover {
+            transform: scale(1.05);
+            box-shadow: 0 6px 12px rgba(0, 0, 0, 0.15);
+        }
+        
+        .feedback {
+            font-size: 1.1rem;
+            text-align: center;
+            margin-top: 15px;
+            font-weight: bold;
+            min-height: 35px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 0 10px;
+        }
+        
+        .correct {
+            color: #2ecc71;
+        }
+        
+        .incorrect {
+            color: #e74c3c;
+        }
+        
+        .progress-container {
+            width: 95%;
+            max-width: 500px;
+            height: 18px;
+            background-color: #e0e0e0;
+            border-radius: 10px;
+            margin: 15px auto;
+            overflow: hidden;
+        }
+        
+        .progress-bar {
+            height: 100%;
+            background: linear-gradient(90deg, #4cd964 0%, #5ac8fa 100%);
+            border-radius: 10px;
+            transition: width 0.5s ease;
+        }
+        
+        .speaker-btn {
+            background-color: #5ac8fa;
+            border: none;
+            border-radius: 50%;
+            width: 45px;
+            height: 45px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            position: absolute;
+            right: 15px;
+            bottom: 15px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+            transition: all 0.3s ease;
+            z-index: 100;
+            font-size: 1.2rem;
+        }
+        
+        .speaker-btn:hover {
+            transform: scale(1.1);
+            background-color: #4cd964;
+        }
+        
+        .character {
+            position: absolute;
+            bottom: 15px;
+            left: 15px;
+            width: 70px;
+            height: 90px;
+            background: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100"><circle cx="50" cy="30" r="20" fill="%23FFD54F"/><circle cx="40" cy="25" r="3" fill="%235D4037"/><circle cx="60" cy="25" r="3" fill="%235D4037"/><path d="M45 35 Q50 40 55 35" stroke="%235D4037" stroke-width="2" fill="none"/><rect x="35" y="50" width="30" height="40" rx="5" fill="%234CAF50"/></svg>') no-repeat center;
+            background-size: contain;
+            z-index: 10;
+        }
+        
+        .instructions {
+            background: white;
+            border-radius: 15px;
+            padding: 15px;
+            margin-top: 15px;
+            box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+            width: 95%;
+            max-width: 500px;
+        }
+        
+        .instructions h3 {
+            color: #ff6b6b;
+            margin-bottom: 10px;
+            text-align: center;
+        }
+        
+        .instructions ul {
+            padding-left: 20px;
+            font-size: 0.9rem;
+            color: #555;
+        }
+        
+        .instructions li {
+            margin-bottom: 8px;
+            line-height: 1.4;
+        }
+        
+        .wechat-note {
+            background: #fffde7;
+            border: 1px solid #ffd54f;
+            border-radius: 10px;
+            padding: 10px 15px;
+            margin-top: 15px;
+            text-align: center;
+            font-size: 0.85rem;
+            color: #5d4037;
+            max-width: 500px;
+        }
+        
+        .game-info {
+            display: flex;
+            justify-content: space-between;
+            width: 95%;
+            max-width: 500px;
+            margin: 10px auto;
+            font-size: 0.9rem;
+            color: #555;
+        }
+        
+        .score {
+            background: #e3f2fd;
+            padding: 5px 15px;
+            border-radius: 20px;
+            font-weight: bold;
+        }
+        
+        .level {
+            background: #ffecb3;
+            padding: 5px 15px;
+            border-radius: 20px;
+            font-weight: bold;
+        }
+        
+        /* 新增拼写区域样式 */
+        .spelling-container {
+            width: 100%;
+            max-width: 500px;
+            margin: 20px auto;
+            text-align: center;
+        }
+        
+        .spelling-prompt {
+            font-size: 1.4rem;
+            margin-bottom: 20px;
+            color: #ff6b6b;
+            font-weight: bold;
+        }
+        
+        .spelling-input {
+            width: 100%;
+            padding: 12px;
+            font-size: 1.2rem;
+            border: 2px solid #4facfe;
+            border-radius: 10px;
+            text-align: center;
+            margin-bottom: 15px;
+        }
+        
+        .spelling-input:focus {
+            outline: none;
+            border-color: #ff6b6b;
+            box-shadow: 0 0 0 3px rgba(255, 107, 107, 0.3);
+        }
+        
+        .spelling-hint {
+            font-size: 1rem;
+            color: #777;
+            margin-bottom: 15px;
+        }
+        
+        .spelling-buttons {
+            display: flex;
+            gap: 10px;
+            justify-content: center;
+            margin-top: 10px;
+        }
+        
+        .spelling-btn {
+            padding: 10px 20px;
+            border: none;
+            border-radius: 30px;
+            font-weight: bold;
+            cursor: pointer;
+            transition: all 0.3s;
+        }
+        
+        .check-btn {
+            background: linear-gradient(135deg, #4cd964 0%, #5ac8fa 100%);
+            color: white;
+        }
+        
+        .skip-btn {
+            background: linear-gradient(135deg, #ffb347 0%, #ffcc33 100%);
+            color: white;
+        }
+        
+        .spelling-btn:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+        }
+        
+        /* 填空练习样式 */
+        .fill-container {
+            width: 100%;
+            max-width: 500px;
+            margin: 20px auto;
+            text-align: center;
+        }
+        
+        .sentence {
+            font-size: 1.4rem;
+            margin-bottom: 20px;
+            color: #2c3e50;
+            line-height: 1.6;
+        }
+        
+        .blank {
+            display: inline-block;
+            min-width: 80px;
+            border-bottom: 3px dashed #ff6b6b;
+            margin: 0 5px;
+            position: relative;
+            vertical-align: middle;
+        }
+        
+        .blank-answer {
+            position: absolute;
+            bottom: -5px;
+            left: 0;
+            width: 100%;
+            text-align: center;
+            color: #e74c3c;
+            font-weight: bold;
+            font-size: 1.1rem;
+        }
+        
+        .fill-options {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 10px;
+            margin-top: 20px;
+        }
+        
+        .fill-option {
+            background: linear-gradient(135deg, #a1c4fd 0%, #c2e9fb 100%);
+            border: none;
+            border-radius: 30px;
+            padding: 10px 20px;
+            font-size: 1rem;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            color: #2c3e50;
+            font-weight: bold;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        }
+        
+        .fill-option:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 6px 12px rgba(0, 0, 0, 0.15);
+        }
+        
+        .fill-option.selected {
+            background: linear-gradient(135deg, #ffb347 0%, #ffcc33 100%);
+            transform: scale(1.05);
+            color: white;
+        }
+        
+        /* 语音状态提示 */
+        .voice-status {
+            position: absolute;
+            top: 15px;
+            right: 15px;
+            background: rgba(255, 255, 255, 0.8);
+            border-radius: 20px;
+            padding: 5px 12px;
+            font-size: 0.8rem;
+            display: flex;
+            align-items: center;
+            gap: 5px;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+        }
+        
+        .voice-status.speaking {
+            color: #2ecc71;
+        }
+        
+        .voice-status.muted {
+            color: #e74c3c;
+        }
+        
+        .voice-icon {
+            font-size: 1rem;
+        }
+        
+        /* 语音波动动画 */
+        @keyframes wave {
+            0%, 100% { height: 5px; }
+            50% { height: 15px; }
+        }
+        
+        .voice-animation {
+            display: flex;
+            align-items: flex-end;
+            gap: 2px;
+            height: 20px;
+        }
+        
+        .voice-bar {
+            width: 3px;
+            background: #4cd964;
+            border-radius: 3px;
+        }
+        
+        .voice-bar:nth-child(1) { animation: wave 1s infinite 0s; }
+        .voice-bar:nth-child(2) { animation: wave 1s infinite 0.2s; }
+        .voice-bar:nth-child(3) { animation: wave 1s infinite 0.4s; }
+        .voice-bar:nth-child(4) { animation: wave 1s infinite 0.6s; }
+        .voice-bar:nth-child(5) { animation: wave 1s infinite 0.8s; }
+        
+        /* 新增卡片翻转效果 */
+        .card.flipped .card-back {
+            transform: rotateY(0deg);
+        }
+        
+        .card.flipped .card-front {
+            transform: rotateY(180deg);
+        }
+        
+        .card-inner {
+            position: relative;
+            width: 100%;
+            height: 100%;
+            text-align: center;
+            transition: transform 0.6s;
+            transform-style: preserve-3d;
+        }
+        
+        .card-front, .card-back {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            backface-visibility: hidden;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+        }
+        
+        .card-back {
+            background: linear-gradient(135deg, #ff9a9e 0%, #fad0c4 100%);
+            transform: rotateY(180deg);
+        }
+        
+        .card-back .card-icon {
+            color: #d63031;
+        }
+        
+        /* 单词卡片标签 */
+        .card-tag {
+            position: absolute;
+            top: 5px;
+            right: 5px;
+            background: rgba(255, 255, 255, 0.7);
+            border-radius: 10px;
+            padding: 2px 8px;
+            font-size: 0.7rem;
+            font-weight: bold;
+        }
+        
+        /* 新增摇动动画 */
+        @keyframes shake {
+            0%, 100% { transform: translateX(0); }
+            10%, 30%, 50%, 70%, 90% { transform: translateX(-5px); }
+            20%, 40%, 60%, 80% { transform: translateX(5px); }
+        }
+        
+        .shake {
+            animation: shake 0.5s;
+        }
+        
+        @media (max-width: 600px) {
+            .card-grid {
+                grid-template-columns: repeat(3, 1fr);
+            }
+            
+            h1 {
+                font-size: 1.6rem;
+            }
+            
+            .card {
+                height: 80px;
+            }
+            
+            .card-icon {
+                font-size: 1.5rem;
+            }
+            
+            .card-text {
+                font-size: 0.9rem;
+            }
+            
+            .dialog-text {
+                font-size: 1.1rem;
+            }
+            
+            .unit-btn {
+                padding: 8px 12px;
+                font-size: 0.9rem;
+            }
+            
+            .game-mode-selector {
+                gap: 8px;
+            }
+            
+            .mode-btn {
+                padding: 8px 12px;
+                font-size: 0.9rem;
+                min-width: 100px;
+            }
+            
+            .spelling-prompt, .sentence {
+                font-size: 1.2rem;
+            }
+            
+            .fill-option {
+                padding: 8px 15px;
+                font-size: 0.9rem;
+            }
+            
+            .voice-status {
+                top: 5px;
+                right: 5px;
+                font-size: 0.7rem;
+                padding: 3px 8px;
+            }
+        }
+        
+        @media (max-width: 400px) {
+            .card-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+            
+            .unit-btn {
+                min-width: 80px;
+                padding: 7px 10px;
+                font-size: 0.85rem;
+            }
+            
+            .answer-btn {
+                min-width: 100px;
+                padding: 8px 10px;
+                font-size: 0.85rem;
+            }
+            
+            .mode-btn {
+                padding: 6px 10px;
+                font-size: 0.85rem;
+                min-width: 80px;
+            }
+            
+            .spelling-prompt, .sentence {
+                font-size: 1.1rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1>英语小达人增强版</h1>
+            <div class="subtitle">沪教版二年级英语趣味学习</div>
+            <div class="voice-status" id="voiceStatus">
+                <span class="voice-icon">🔊</span>
+                <span id="statusText">语音功能已启用</span>
+                <div class="voice-animation" id="voiceAnimation">
+                    <div class="voice-bar"></div>
+                    <div class="voice-bar"></div>
+                    <div class="voice-bar"></div>
+                    <div class="voice-bar"></div>
+                    <div class="voice-bar"></div>
+                </div>
+            </div>
+        </header>
+        
+        <div class="unit-selector">
+            <button class="unit-btn active" data-unit="1">
+                <span>🌞</span> Unit 1
+            </button>
+            <button class="unit-btn" data-unit="2">
+                <span>✏️</span> Unit 2
+            </button>
+            <button class="unit-btn" data-unit="3">
+                <span>🍂</span> Unit 3
+            </button>
+            <button class="unit-btn" data-unit="4">
+                <span>🌙</span> Unit 4
+            </button>
+        </div>
+        
+        <div class="game-area">
+            <h2 class="game-title">Unit 1: 问候与自我介绍</h2>
+            
+            <div class="game-mode-selector">
+                <button class="mode-btn active" data-mode="vocab">单词学习</button>
+                <button class="mode-btn" data-mode="dialog">对话练习</button>
+                <button class="mode-btn" data-mode="game">互动游戏</button>
+                <button class="mode-btn" data-mode="spelling">单词拼写</button>
+                <button class="mode-btn" data-mode="fill-in">句型填空</button>
+            </div>
+            
+            <div class="game-info">
+                <div class="score">积分: <span id="score">0</span></div>
+                <div class="level">等级: <span id="level">初级</span></div>
+            </div>
+            
+            <div class="card-grid">
+                <!-- 卡片内容由JS动态生成 -->
+            </div>
+            
+            <div class="dialog-box" id="dialogBox">
+                <div class="dialog-text" id="question">Hello! How are you?</div>
+                <div class="answer-options" id="answerOptions">
+                    <!-- 答案选项由JS动态生成 -->
+                </div>
+            </div>
+            
+            <!-- 拼写练习区域 -->
+            <div class="spelling-container" id="spellingContainer" style="display: none;">
+                <div class="spelling-prompt" id="spellingPrompt"></div>
+                <input type="text" class="spelling-input" id="spellingInput" placeholder="请输入单词">
+                <div class="spelling-hint" id="spellingHint"></div>
+                <div class="spelling-buttons">
+                    <button class="spelling-btn check-btn" id="checkSpelling">检查</button>
+                    <button class="spelling-btn skip-btn" id="skipSpelling">跳过</button>
+                </div>
+            </div>
+            
+            <!-- 填空练习区域 -->
+            <div class="fill-container" id="fillContainer" style="display: none;">
+                <div class="sentence" id="sentenceText"></div>
+                <div class="fill-options" id="fillOptions"></div>
+            </div>
+            
+            <div class="progress-container">
+                <div class="progress-bar" id="progressBar" style="width: 0%"></div>
+            </div>
+            
+            <div class="feedback" id="feedback"></div>
+        </div>
+        
+        <button class="speaker-btn" id="speakerBtn">
+            🔊
+        </button>
+        
+        <div class="character"></div>
+    </div>
+
+    <div class="instructions">
+        <h3>游戏说明</h3>
+        <ul>
+            <li>选择顶部不同单元学习不同主题的英语内容</li>
+            <li>使用五种学习模式：单词学习、对话练习、互动游戏、单词拼写和句型填空</li>
+            <li>在单词拼写模式下，根据提示拼写单词</li>
+            <li>在句型填空模式下，选择正确单词完成句子</li>
+            <li>点击单词卡片学习发音和含义（点击卡片可翻转）</li>
+            <li>在对话框中选择正确的回答完成对话练习</li>
+            <li>右下角喇叭图标可以重复听问题</li>
+            <li>进度条显示你的学习进度，积分和等级会随着学习提高</li>
+        </ul>
+    </div>
+    
+    <div class="wechat-note">
+        提示：在微信中长按此页面，选择"在浏览器打开"，可获得最佳体验
+    </div>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            // 全局变量
+            let currentUnit = 1;
+            let currentMode = 'vocab';
+            let userScore = 0;
+            let userLevel = 1;
+            let speechSupported = ('speechSynthesis' in window);
+            let currentSpellingWord = null;
+            let currentFillQuestion = null;
+            let isSpeaking = false;
+            
+            // DOM元素
+            const unitButtons = document.querySelectorAll('.unit-btn');
+            const modeButtons = document.querySelectorAll('.mode-btn');
+            const cardGrid = document.querySelector('.card-grid');
+            const questionEl = document.getElementById('question');
+            const answerOptionsEl = document.getElementById('answerOptions');
+            const feedbackEl = document.getElementById('feedback');
+            const progressBar = document.getElementById('progressBar');
+            const speakerBtn = document.getElementById('speakerBtn');
+            const scoreEl = document.getElementById('score');
+            const levelEl = document.getElementById('level');
+            const spellingContainer = document.getElementById('spellingContainer');
+            const spellingPrompt = document.getElementById('spellingPrompt');
+            const spellingInput = document.getElementById('spellingInput');
+            const spellingHint = document.getElementById('spellingHint');
+            const checkSpellingBtn = document.getElementById('checkSpelling');
+            const skipSpellingBtn = document.getElementById('skipSpelling');
+            const fillContainer = document.getElementById('fillContainer');
+            const sentenceText = document.getElementById('sentenceText');
+            const fillOptions = document.getElementById('fillOptions');
+            const voiceStatus = document.getElementById('voiceStatus');
+            const statusText = document.getElementById('statusText');
+            const voiceAnimation = document.getElementById('voiceAnimation');
+            
+            // 游戏数据 - 包含所有单元的所有单词和句子
+            const gameData = {
+                units: {
+                    1: {
+                        title: "Unit 1: 问候与自我介绍",
+                        vocab: [
+                            {icon: '🌞', text: 'Good morning', word: 'morning', meaning: '早上好'},
+                            {icon: '☀️', text: 'Good afternoon', word: 'afternoon', meaning: '下午好'},
+                            {icon: '🌇', text: 'Good evening', word: 'evening', meaning: '晚上好'},
+                            {icon: '🌙', text: 'Good night', word: 'night', meaning: '晚安'},
+                            {icon: '😊', text: 'I\'m fine', word: 'fine', meaning: '我很好'},
+                            {icon: '👍', text: 'Excellent', word: 'excellent', meaning: '太棒了'},
+                            {icon: '👦', text: 'Boy', word: 'boy', meaning: '男孩'},
+                            {icon: '👧', text: 'Girl', word: 'girl', meaning: '女孩'},
+                            {icon: '1️⃣', text: 'One', word: 'one', meaning: '一'},
+                            {icon: '2️⃣', text: 'Two', word: 'two', meaning: '二'},
+                            {icon: '3️⃣', text: 'Three', word: 'three', meaning: '三'},
+                            {icon: '4️⃣', text: 'Four', word: 'four', meaning: '四'},
+                            {icon: '5️⃣', text: 'Five', word: 'five', meaning: '五'},
+                            {icon: '6️⃣', text: 'Six', word: 'six', meaning: '六'},
+                            {icon: '7️⃣', text: 'Seven', word: 'seven', meaning: '七'},
+                            {icon: '8️⃣', text: 'Eight', word: 'eight', meaning: '八'},
+                            {icon: '9️⃣', text: 'Nine', word: 'nine', meaning: '九'},
+                            {icon: '🔟', text: 'Ten', word: 'ten', meaning: '十'},
+                            {icon: '⚪', text: 'White', word: 'white', meaning: '白色'},
+                            {icon: '🟣', text: 'Purple', word: 'purple', meaning: '紫色'},
+                            {icon: '🎀', text: 'Pink', word: 'pink', meaning: '粉色'},
+                            {icon: '🍊', text: 'Orange', word: 'orange', meaning: '橙色'},
+                            {icon: '🟤', text: 'Brown', word: 'brown', meaning: '棕色'},
+                            {icon: '⚫', text: 'Black', word: 'black', meaning: '黑色'},
+                            // 新增单词卡片
+                            {icon: '❤️', text: 'Red', word: 'red', meaning: '红色'},
+                            {icon: '💚', text: 'Green', word: 'green', meaning: '绿色'},
+                            {icon: '💛', text: 'Yellow', word: 'yellow', meaning: '黄色'},
+                            {icon: '💙', text: 'Blue', word: 'blue', meaning: '蓝色'},
+                            {icon: '👩‍🏫', text: 'Teacher', word: 'teacher', meaning: '老师'},
+                            {icon: '👨‍🎓', text: 'Student', word: 'student', meaning: '学生'}
+                        ],
+                        dialogs: [
+                            {
+                                question: "Hello! How are you?",
+                                answers: [
+                                    {text: "I'm fine, thank you!", correct: true},
+                                    {text: "Good morning!", correct: false},
+                                    {text: "I'm a boy.", correct: false}
+                                ]
+                            },
+                            {
+                                question: "Are you a boy?",
+                                answers: [
+                                    {text: "Yes, I'm a boy.", correct: true},
+                                    {text: "No, I'm a girl.", correct: false},
+                                    {text: "I'm excellent!", correct: false}
+                                ]
+                            },
+                            {
+                                question: "What color is this?",
+                                answers: [
+                                    {text: "It's white.", correct: true},
+                                    {text: "It's a bag.", correct: false},
+                                    {text: "I like pink.", correct: false}
+                                ]
+                            }
+                        ],
+                        spelling: [
+                            {hint: "早上好", word: "morning"},
+                            {hint: "男孩", word: "boy"},
+                            {hint: "女孩", word: "girl"},
+                            {hint: "数字3", word: "three"},
+                            {hint: "白色", word: "white"},
+                            {hint: "黑色", word: "black"},
+                            {hint: "红色", word: "red"},
+                            {hint: "老师", word: "teacher"}
+                        ],
+                        fillIn: [
+                            {
+                                sentence: "Good ____, teacher!",
+                                options: ["morning", "afternoon", "evening", "night"],
+                                correct: "morning"
+                            },
+                            {
+                                sentence: "I am a ____.",
+                                options: ["boy", "girl", "student", "teacher"],
+                                correct: "boy"
+                            },
+                            {
+                                sentence: "The sky is ____.",
+                                options: ["blue", "white", "black", "green"],
+                                correct: "blue"
+                            }
+                        ]
+                    },
+                    2: {
+                        title: "Unit 2: 动作与能力",
+                        vocab: [
+                            {icon: '🏃', text: 'Run', word: 'run', meaning: '跑步'},
+                            {icon: '✍️', text: 'Write', word: 'write', meaning: '写字'},
+                            {icon: '🏊', text: 'Swim', word: 'swim', meaning: '游泳'},
+                            {icon: '🦅', text: 'Fly', word: 'fly', meaning: '飞翔'},
+                            {icon: '🦸', text: 'Supergirl', word: 'supergirl', meaning: '超级女孩'},
+                            {icon: '🛹', text: 'Skate', word: 'skate', meaning: '滑冰'},
+                            {icon: '🐇', text: 'Hop', word: 'hop', meaning: '跳跃'},
+                            {icon: '🚲', text: 'Ride bicycle', word: 'ride', meaning: '骑自行车'},
+                            {icon: '🥗', text: 'Salad', word: 'salad', meaning: '沙拉'},
+                            {icon: '🥕', text: 'Carrot', word: 'carrot', meaning: '胡萝卜'},
+                            {icon: '🐟', text: 'Fish', word: 'fish', meaning: '鱼'},
+                            {icon: '🍗', text: 'Chicken', word: 'chicken', meaning: '鸡肉'},
+                            {icon: '🍌', text: 'Banana', word: 'banana', meaning: '香蕉'},
+                            {icon: '🦒', text: 'Giraffe', word: 'giraffe', meaning: '长颈鹿'},
+                            {icon: '🐍', text: 'Snake', word: 'snake', meaning: '蛇'},
+                            {icon: '🐘', text: 'Elephant', word: 'elephant', meaning: '大象'},
+                            {icon: '🦓', text: 'Zebra', word: 'zebra', meaning: '斑马'},
+                            {icon: '🐼', text: 'Panda', word: 'panda', meaning: '熊猫'},
+                            // 新增单词卡片
+                            {icon: '🤸', text: 'Jump', word: 'jump', meaning: '跳跃'},
+                            {icon: '🧗', text: 'Climb', word: 'climb', meaning: '攀爬'},
+                            {icon: '🎤', text: 'Sing', word: 'sing', meaning: '唱歌'},
+                            {icon: '💃', text: 'Dance', word: 'dance', meaning: '跳舞'},
+                            {icon: '📖', text: 'Read', word: 'read', meaning: '阅读'},
+                            {icon: '🍎', text: 'Eat', word: 'eat', meaning: '吃'}
+                        ],
+                        dialogs: [
+                            {
+                                question: "Can you swim?",
+                                answers: [
+                                    {text: "Yes, I can swim.", correct: true},
+                                    {text: "No, I can't swim.", correct: false},
+                                    {text: "I like swimming.", correct: false}
+                                ]
+                            },
+                            {
+                                question: "Do you like bananas?",
+                                answers: [
+                                    {text: "Yes, I like bananas.", correct: true},
+                                    {text: "I can skate.", correct: false},
+                                    {text: "It's a banana.", correct: false}
+                                ]
+                            },
+                            {
+                                question: "What can you do?",
+                                answers: [
+                                    {text: "I can run and jump.", correct: true},
+                                    {text: "I like pizza.", correct: false},
+                                    {text: "I'm a supergirl.", correct: false}
+                                ]
+                            }
+                        ],
+                        spelling: [
+                            {hint: "跑步", word: "run"},
+                            {hint: "游泳", word: "swim"},
+                            {hint: "香蕉", word: "banana"},
+                            {hint: "熊猫", word: "panda"},
+                            {hint: "长颈鹿", word: "giraffe"},
+                            {hint: "写字", word: "write"},
+                            {hint: "跳舞", word: "dance"},
+                            {hint: "攀爬", word: "climb"}
+                        ],
+                        fillIn: [
+                            {
+                                sentence: "I can ____ fast.",
+                                options: ["run", "swim", "fly", "write"],
+                                correct: "run"
+                            },
+                            {
+                                sentence: "The ____ is tall.",
+                                options: ["giraffe", "panda", "elephant", "zebra"],
+                                correct: "giraffe"
+                            },
+                            {
+                                sentence: "Do you like ____?",
+                                options: ["bananas", "apples", "oranges", "grapes"],
+                                correct: "bananas"
+                            }
+                        ]
+                    },
+                    3: {
+                        title: "Unit 3: 物品与位置",
+                        vocab: [
+                            {icon: '🛝', text: 'Slide', word: 'slide', meaning: '滑梯'},
+                            {icon: '🧸', text: 'Teddy bear', word: 'bear', meaning: '泰迪熊'},
+                            {icon: '💺', text: 'Chair', word: 'chair', meaning: '椅子'},
+                            {icon: '📦', text: 'Box', word: 'box', meaning: '盒子'},
+                            {icon: '🥣', text: 'Bowl', word: 'bowl', meaning: '碗'},
+                            {icon: '🥢', text: 'Chopsticks', word: 'chopsticks', meaning: '筷子'},
+                            {icon: '📏', text: 'Ruler', word: 'ruler', meaning: '尺子'},
+                            {icon: '✏️', text: 'Pencil', word: 'pencil', meaning: '铅笔'},
+                            {icon: '🍂', text: 'Autumn', word: 'autumn', meaning: '秋天'},
+                            {icon: '❄️', text: 'Winter', word: 'winter', meaning: '冬天'},
+                            {icon: '😎', text: 'Cool', word: 'cool', meaning: '凉爽'},
+                            {icon: '🥶', text: 'Cold', word: 'cold', meaning: '寒冷'},
+                            {icon: '☀️', text: 'Sunny', word: 'sunny', meaning: '晴朗'},
+                            {icon: '🌬️', text: 'Windy', word: 'windy', meaning: '有风'},
+                            {icon: '🚦', text: 'Traffic light', word: 'light', meaning: '红绿灯'},
+                            {icon: '👖', text: 'Trousers', word: 'trousers', meaning: '裤子'},
+                            {icon: '🧥', text: 'Coat', word: 'coat', meaning: '外套'},
+                            // 新增单词卡片
+                            {icon: '🪑', text: 'Desk', word: 'desk', meaning: '书桌'},
+                            {icon: '📚', text: 'Book', word: 'book', meaning: '书'},
+                            {icon: '🖊️', text: 'Pen', word: 'pen', meaning: '钢笔'},
+                            {icon: '🎒', text: 'Bag', word: 'bag', meaning: '书包'},
+                            {icon: '🧽', text: 'Rubber', word: 'rubber', meaning: '橡皮'},
+                            {icon: '✏️', text: 'Sharpener', word: 'sharpener', meaning: '削笔刀'}
+                        ],
+                        dialogs: [
+                            {
+                                question: "Where is the book?",
+                                answers: [
+                                    {text: "It's on the table.", correct: true},
+                                    {text: "It's a book.", correct: false},
+                                    {text: "I like reading.", correct: false}
+                                ]
+                            },
+                            {
+                                question: "How is the weather today?",
+                                answers: [
+                                    {text: "It's sunny and warm.", correct: true},
+                                    {text: "I like sunny days.", correct: false},
+                                    {text: "It's a sunny day.", correct: false}
+                                ]
+                            },
+                            {
+                                question: "What do you wear in winter?",
+                                answers: [
+                                    {text: "I wear a coat and trousers.", correct: true},
+                                    {text: "I like winter.", correct: false},
+                                    {text: "It's cold in winter.", correct: false}
+                                ]
+                            }
+                        ],
+                        spelling: [
+                            {hint: "椅子", word: "chair"},
+                            {hint: "铅笔", word: "pencil"},
+                            {hint: "尺子", word: "ruler"},
+                            {hint: "秋天", word: "autumn"},
+                            {hint: "冬天", word: "winter"},
+                            {hint: "外套", word: "coat"},
+                            {hint: "书桌", word: "desk"},
+                            {hint: "书包", word: "bag"}
+                        ],
+                        fillIn: [
+                            {
+                                sentence: "The book is on the ____.",
+                                options: ["table", "chair", "box", "floor"],
+                                correct: "table"
+                            },
+                            {
+                                sentence: "It is ____ in winter.",
+                                options: ["cold", "hot", "warm", "cool"],
+                                correct: "cold"
+                            },
+                            {
+                                sentence: "I wear a ____ in winter.",
+                                options: ["coat", "T-shirt", "shorts", "skirt"],
+                                correct: "coat"
+                            }
+                        ]
+                    },
+                    4: {
+                        title: "Unit 4: 自然与动物",
+                        vocab: [
+                            {icon: '☀️', text: 'Sun', word: 'sun', meaning: '太阳'},
+                            {icon: '🌙', text: 'Moon', word: 'moon', meaning: '月亮'},
+                            {icon: '⭐', text: 'Star', word: 'star', meaning: '星星'},
+                            {icon: '🦊', text: 'Fox', word: 'fox', meaning: '狐狸'},
+                            {icon: '🦛', text: 'Hippo', word: 'hippo', meaning: '河马'},
+                            {icon: '🐇', text: 'Rabbit', word: 'rabbit', meaning: '兔子'},
+                            {icon: '🐵', text: 'Monkey', word: 'monkey', meaning: '猴子'},
+                            {icon: '🐝', text: 'Bee', word: 'bee', meaning: '蜜蜂'},
+                            {icon: '⚽', text: 'Football', word: 'football', meaning: '足球'},
+                            {icon: '🏀', text: 'Basketball', word: 'basketball', meaning: '篮球'},
+                            {icon: '🎈', text: 'Balloon', word: 'balloon', meaning: '气球'},
+                            {icon: '🥪', text: 'Bread', word: 'bread', meaning: '面包'},
+                            {icon: '🥛', text: 'Milk', word: 'milk', meaning: '牛奶'},
+                            {icon: '😋', text: 'Hungry', word: 'hungry', meaning: '饥饿'},
+                            {icon: '🥤', text: 'Thirsty', word: 'thirsty', meaning: '口渴'},
+                            {icon: '🎨', text: 'Drawing', word: 'drawing', meaning: '画画'},
+                            {icon: '📚', text: 'Reading', word: 'reading', meaning: '阅读'},
+                            // 新增单词卡片
+                            {icon: '🌳', text: 'Tree', word: 'tree', meaning: '树'},
+                            {icon: '🌸', text: 'Flower', word: 'flower', meaning: '花'},
+                            {icon: '🌿', text: 'Grass', word: 'grass', meaning: '草'},
+                            {icon: '🐦', text: 'Bird', word: 'bird', meaning: '鸟'},
+                            {icon: '🦋', text: 'Butterfly', word: 'butterfly', meaning: '蝴蝶'},
+                            {icon: '☁️', text: 'Cloud', word: 'cloud', meaning: '云'}
+                        ],
+                        dialogs: [
+                            {
+                                question: "Can you see the moon?",
+                                answers: [
+                                    {text: "Yes, I can see the moon.", correct: true},
+                                    {text: "No, I can't see the moon.", correct: false},
+                                    {text: "The moon is big.", correct: false}
+                                ]
+                            },
+                            {
+                                question: "What do you like?",
+                                answers: [
+                                    {text: "I like playing basketball.", correct: true},
+                                    {text: "I can play basketball.", correct: false},
+                                    {text: "Basketball is fun.", correct: false}
+                                ]
+                            },
+                            {
+                                question: "Are you hungry?",
+                                answers: [
+                                    {text: "Yes, I'm hungry. I want bread.", correct: true},
+                                    {text: "I like bread.", correct: false},
+                                    {text: "Bread is delicious.", correct: false}
+                                ]
+                            }
+                        ],
+                        spelling: [
+                            {hint: "太阳", word: "sun"},
+                            {hint: "月亮", word: "moon"},
+                            {hint: "兔子", word: "rabbit"},
+                            {hint: "猴子", word: "monkey"},
+                            {hint: "面包", word: "bread"},
+                            {hint: "牛奶", word: "milk"},
+                            {hint: "树", word: "tree"},
+                            {hint: "花", word: "flower"}
+                        ],
+                        fillIn: [
+                            {
+                                sentence: "The ____ is hot.",
+                                options: ["sun", "moon", "star", "cloud"],
+                                correct: "sun"
+                            },
+                            {
+                                sentence: "I like to play ____.",
+                                options: ["basketball", "football", "tennis", "volleyball"],
+                                correct: "basketball"
+                            },
+                            {
+                                sentence: "I am ____. I want bread.",
+                                options: ["hungry", "thirsty", "tired", "happy"],
+                                correct: "hungry"
+                            }
+                        ]
+                    }
+                }
+            };
+            
+            // 初始化游戏
+            function initGame() {
+                // 检查语音支持
+                if (!speechSupported) {
+                    voiceStatus.classList.add('muted');
+                    statusText.textContent = "语音功能不可用";
+                    voiceAnimation.style.display = 'none';
+                    feedbackEl.textContent = "当前环境不支持语音功能";
+                    feedbackEl.className = "feedback incorrect";
+                }
+                
+                // 单元选择事件
+                unitButtons.forEach(button => {
+                    button.addEventListener('click', function() {
+                        unitButtons.forEach(btn => btn.classList.remove('active'));
+                        this.classList.add('active');
+                        
+                        currentUnit = this.getAttribute('data-unit');
+                        loadUnit(currentUnit);
+                    });
+                });
+                
+                // 模式选择事件
+                modeButtons.forEach(button => {
+                    button.addEventListener('click', function() {
+                        modeButtons.forEach(btn => btn.classList.remove('active'));
+                        this.classList.add('active');
+                        
+                        currentMode = this.getAttribute('data-mode');
+                        loadMode(currentMode);
+                    });
+                });
+                
+                // 语音按钮事件
+                speakerBtn.addEventListener('click', function() {
+                    if (currentMode === 'vocab') {
+                        // 在单词模式下，朗读问题
+                        speakText(questionEl.textContent);
+                    } else {
+                        // 在对话模式下，朗读问题
+                        speakText(questionEl.textContent);
+                    }
+                });
+                
+                // 拼写检查按钮
+                checkSpellingBtn.addEventListener('click', checkSpelling);
+                
+                // 跳过拼写按钮
+                skipSpellingBtn.addEventListener('click', nextSpelling);
+                
+                // 初始加载
+                loadUnit(1);
+                updateUserInfo();
+            }
+            
+            // 加载单元内容
+            function loadUnit(unitNumber) {
+                const unit = gameData.units[unitNumber];
+                document.querySelector('.game-title').textContent = unit.title;
+                
+                // 重置进度
+                progressBar.style.width = "0%";
+                feedbackEl.textContent = "";
+                feedbackEl.className = "feedback";
+                
+                // 加载当前模式内容
+                loadMode(currentMode);
+            }
+            
+            // 加载模式内容
+            function loadMode(mode) {
+                const unit = gameData.units[currentUnit];
+                
+                // 隐藏所有特殊容器
+                spellingContainer.style.display = 'none';
+                fillContainer.style.display = 'none';
+                document.getElementById('dialogBox').style.display = 'block';
+                cardGrid.style.display = 'grid';
+                
+                if (mode === 'vocab') {
+                    // 词汇学习模式
+                    loadVocabMode(unit.vocab);
+                } else if (mode === 'dialog') {
+                    // 对话练习模式
+                    loadDialogMode(unit.dialogs);
+                } else if (mode === 'game') {
+                    // 游戏模式
+                    loadGameMode(unit.vocab);
+                } else if (mode === 'spelling') {
+                    // 单词拼写模式
+                    loadSpellingMode(unit.spelling);
+                    document.getElementById('dialogBox').style.display = 'none';
+                    cardGrid.style.display = 'none';
+                } else if (mode === 'fill-in') {
+                    // 句型填空模式
+                    loadFillInMode(unit.fillIn);
+                    document.getElementById('dialogBox').style.display = 'none';
+                    cardGrid.style.display = 'none';
+                }
+            }
+            
+            // 加载词汇学习模式
+            function loadVocabMode(vocabList) {
+                cardGrid.innerHTML = '';
+                questionEl.textContent = "点击卡片学习单词发音";
+                answerOptionsEl.innerHTML = '';
+                
+                vocabList.forEach(item => {
+                    const cardElement = document.createElement('div');
+                    cardElement.className = 'card';
+                    cardElement.innerHTML = `
+                        <div class="card-inner">
+                            <div class="card-front">
+                                <div class="card-icon">${item.icon}</div>
+                                <div class="card-text">${item.text}</div>
+                                <div class="card-tag">点击翻转</div>
+                            </div>
+                            <div class="card-back">
+                                <div class="card-icon">📖</div>
+                                <div class="card-text">${item.meaning}</div>
+                            </div>
+                        </div>
+                    `;
+                    cardElement.addEventListener('click', function() {
+                        this.classList.toggle('flipped');
+                        speakWord(item.word);
+                        
+                        // 增加积分
+                        userScore += 5;
+                        updateUserInfo();
+                    });
+                    cardGrid.appendChild(cardElement);
+                });
+            }
+            
+            // 加载对话练习模式
+            function loadDialogMode(dialogs) {
+                cardGrid.innerHTML = '';
+                
+                // 随机选择一个对话
+                const randomDialog = dialogs[Math.floor(Math.random() * dialogs.length)];
+                questionEl.textContent = randomDialog.question;
+                
+                // 清空答案选项
+                answerOptionsEl.innerHTML = '';
+                
+                // 添加答案选项
+                randomDialog.answers.forEach(answer => {
+                    const button = document.createElement('button');
+                    button.className = 'answer-btn';
+                    button.textContent = answer.text;
+                    button.dataset.correct = answer.correct;
+                    button.addEventListener('click', function() {
+                        checkAnswer(this.dataset.correct === 'true');
+                    });
+                    answerOptionsEl.appendChild(button);
+                });
+                
+                // 朗读问题
+                speakText(randomDialog.question);
+            }
+            
+            // 加载游戏模式
+            function loadGameMode(vocabList) {
+                // 清空卡片网格
+                cardGrid.innerHTML = '';
+                
+                // 创建匹配游戏
+                const gameWords = [];
+                for (let i = 0; i < 8; i++) {
+                    const wordIndex = Math.floor(Math.random() * vocabList.length);
+                    const word = vocabList[wordIndex];
+                    gameWords.push(word);
+                }
+                
+                // 复制单词以创建配对
+                const allWords = [...gameWords, ...gameWords];
+                
+                // 打乱顺序
+                allWords.sort(() => Math.random() - 0.5);
+                
+                // 创建卡片
+                allWords.forEach((word, index) => {
+                    const cardElement = document.createElement('div');
+                    cardElement.className = 'card';
+                    cardElement.dataset.word = word.word;
+                    cardElement.dataset.index = index;
+                    cardElement.innerHTML = `
+                        <div class="card-icon">❓</div>
+                    `;
+                    
+                    cardElement.addEventListener('click', function() {
+                        revealCard(this, word);
+                    });
+                    
+                    cardGrid.appendChild(cardElement);
+                });
+                
+                questionEl.textContent = "找到匹配的单词卡片";
+            }
+            
+            // 加载拼写模式
+            function loadSpellingMode(spellingList) {
+                spellingContainer.style.display = 'block';
+                spellingInput.value = '';
+                spellingHint.textContent = '';
+                
+                // 随机选择一个单词
+                const randomIndex = Math.floor(Math.random() * spellingList.length);
+                currentSpellingWord = spellingList[randomIndex];
+                
+                spellingPrompt.textContent = `请拼写单词: ${currentSpellingWord.hint}`;
+                spellingHint.textContent = `单词长度: ${currentSpellingWord.word.length} 个字母`;
+                
+                // 朗读提示
+                speakText(`请拼写单词: ${currentSpellingWord.hint}`);
+                
+                // 聚焦输入框
+                setTimeout(() => {
+                    spellingInput.focus();
+                }, 100);
+            }
+            
+            // 检查拼写
+            function checkSpelling() {
+                const userInput = spellingInput.value.trim().toLowerCase();
+                
+                if (userInput === currentSpellingWord.word) {
+                    // 拼写正确
+                    feedbackEl.textContent = '太棒了！拼写正确！';
+                    feedbackEl.className = 'feedback correct';
+                    speakText('Correct! Well done!');
+                    
+                    // 增加积分
+                    userScore += 15;
+                    updateUserInfo();
+                    
+                    // 更新进度条
+                    const currentWidth = parseInt(progressBar.style.width);
+                    progressBar.style.width = (currentWidth + 15) + '%';
+                    
+                    // 加载下一个单词
+                    setTimeout(nextSpelling, 1500);
+                } else {
+                    // 拼写错误
+                    feedbackEl.textContent = '再试一次！你可以的！';
+                    feedbackEl.className = 'feedback incorrect';
+                    speakText('Almost! Try again!');
+                    
+                    // 添加抖动效果
+                    spellingInput.classList.add('shake');
+                    setTimeout(() => {
+                        spellingInput.classList.remove('shake');
+                    }, 500);
+                    
+                    // 聚焦输入框
+                    spellingInput.focus();
+                }
+            }
+            
+            // 下一个拼写单词
+            function nextSpelling() {
+                const unit = gameData.units[currentUnit];
+                loadSpellingMode(unit.spelling);
+                feedbackEl.textContent = '';
+                feedbackEl.className = 'feedback';
+            }
+            
+            // 加载填空模式
+            function loadFillInMode(fillInList) {
+                fillContainer.style.display = 'block';
+                fillOptions.innerHTML = '';
+                
+                // 随机选择一个填空问题
+                const randomIndex = Math.floor(Math.random() * fillInList.length);
+                currentFillQuestion = fillInList[randomIndex];
+                
+                // 显示句子
+                sentenceText.innerHTML = currentFillQuestion.sentence.replace('____', '<span class="blank"><span class="blank-answer"></span>____</span>');
+                
+                // 添加选项
+                currentFillQuestion.options.forEach(option => {
+                    const optionBtn = document.createElement('button');
+                    optionBtn.className = 'fill-option';
+                    optionBtn.textContent = option;
+                    optionBtn.addEventListener('click', function() {
+                        // 移除其他选项的选中状态
+                        document.querySelectorAll('.fill-option').forEach(btn => {
+                            btn.classList.remove('selected');
+                        });
+                        
+                        // 选中当前选项
+                        this.classList.add('selected');
+                        
+                        // 在空白处显示答案
+                        document.querySelector('.blank-answer').textContent = option;
+                        
+                        // 检查答案
+                        checkFillAnswer(option);
+                    });
+                    fillOptions.appendChild(optionBtn);
+                });
+                
+                // 朗读句子
+                speakText(currentFillQuestion.sentence.replace('____', '空白'));
+            }
+            
+            // 检查填空答案
+            function checkFillAnswer(userAnswer) {
+                if (userAnswer === currentFillQuestion.correct) {
+                    // 答案正确
+                    feedbackEl.textContent = '太棒了！回答正确！';
+                    feedbackEl.className = 'feedback correct';
+                    speakText('Correct! Well done!');
+                    
+                    // 增加积分
+                    userScore += 12;
+                    updateUserInfo();
+                    
+                    // 更新进度条
+                    const currentWidth = parseInt(progressBar.style.width);
+                    progressBar.style.width = (currentWidth + 12) + '%';
+                    
+                    // 加载下一个问题
+                    setTimeout(nextFillQuestion, 1500);
+                } else {
+                    // 答案错误
+                    feedbackEl.textContent = '再想一想！';
+                    feedbackEl.className = 'feedback incorrect';
+                    speakText('Almost! Try again!');
+                }
+            }
+            
+            // 下一个填空问题
+            function nextFillQuestion() {
+                const unit = gameData.units[currentUnit];
+                loadFillInMode(unit.fillIn);
+                feedbackEl.textContent = '';
+                feedbackEl.className = 'feedback';
+            }
+            
+            // 游戏模式：显示卡片
+            let firstCard = null;
+            let secondCard = null;
+            let lockBoard = false;
+            
+            function revealCard(card, word) {
+                if (lockBoard) return;
+                if (card === firstCard) return;
+                
+                card.innerHTML = `
+                    <div class="card-icon">${word.icon}</div>
+                    <div class="card-text">${word.text}</div>
+                `;
+                
+                if (!firstCard) {
+                    firstCard = card;
+                    return;
+                }
+                
+                secondCard = card;
+                lockBoard = true;
+                
+                // 检查是否匹配
+                if (firstCard.dataset.word === secondCard.dataset.word) {
+                    // 匹配成功
+                    setTimeout(() => {
+                        firstCard.style.visibility = 'hidden';
+                        secondCard.style.visibility = 'hidden';
+                        resetBoard();
+                        
+                        // 增加积分
+                        userScore += 10;
+                        updateUserInfo();
+                        
+                        // 更新进度
+                        const currentWidth = parseInt(progressBar.style.width);
+                        progressBar.style.width = (currentWidth + 10) + '%';
+                        
+                        // 检查游戏是否结束
+                        checkGameCompletion();
+                    }, 1000);
+                } else {
+                    // 不匹配
+                    setTimeout(() => {
+                        firstCard.innerHTML = '<div class="card-icon">❓</div>';
+                        secondCard.innerHTML = '<div class="card-icon">❓</div>';
+                        resetBoard();
+                    }, 1500);
+                }
+            }
+            
+            function resetBoard() {
+                [firstCard, secondCard, lockBoard] = [null, null, false];
+            }
+            
+            function checkGameCompletion() {
+                const cards = document.querySelectorAll('.card');
+                const hiddenCards = document.querySelectorAll('.card[style*="visibility: hidden"]');
+                
+                if (cards.length === hiddenCards.length) {
+                    feedbackEl.textContent = "恭喜你完成游戏！";
+                    feedbackEl.className = "feedback correct";
+                    
+                    // 增加积分
+                    userScore += 50;
+                    updateUserInfo();
+                    
+                    // 升级
+                    userLevel++;
+                    updateUserInfo();
+                }
+            }
+            
+            // 检查答案
+            function checkAnswer(isCorrect) {
+                if (isCorrect) {
+                    feedbackEl.textContent = 'Good job! You got it right!';
+                    feedbackEl.className = 'feedback correct';
+                    speakText('Correct! Well done!');
+                    
+                    // 增加积分
+                    userScore += 10;
+                    updateUserInfo();
+                } else {
+                    feedbackEl.textContent = 'Try again! You can do it!';
+                    feedbackEl.className = 'feedback incorrect';
+                    speakText('Almost! Try again!');
+                }
+                
+                // 更新进度条
+                const currentWidth = parseInt(progressBar.style.width);
+                progressBar.style.width = (currentWidth + 10) + '%';
+                
+                // 如果进度完成
+                if (currentWidth >= 95) {
+                    setTimeout(() => {
+                        feedbackEl.textContent = 'Congratulations! Unit completed!';
+                        feedbackEl.className = 'feedback correct';
+                        speakText('Congratulations! You finished this unit!');
+                        
+                        // 升级
+                        userLevel++;
+                        updateUserInfo();
+                    }, 1000);
+                }
+                
+                // 加载新问题
+                setTimeout(() => {
+                    const unit = gameData.units[currentUnit];
+                    loadDialogMode(unit.dialogs);
+                }, 1500);
+            }
+            
+            // 更新用户信息
+            function updateUserInfo() {
+                scoreEl.textContent = userScore;
+                
+                // 根据积分设置等级
+                if (userScore < 50) {
+                    levelEl.textContent = "初级";
+                } else if (userScore < 150) {
+                    levelEl.textContent = "中级";
+                } else {
+                    levelEl.textContent = "高级";
+                }
+            }
+            
+            // 朗读单词
+            function speakWord(word) {
+                const wordMap = {
+                    'morning': 'Good morning',
+                    'afternoon': 'Good afternoon',
+                    'evening': 'Good evening',
+                    'night': 'Good night',
+                    'fine': "I'm fine",
+                    'excellent': "I'm excellent",
+                    'boy': 'boy',
+                    'girl': 'girl',
+                    'run': 'run',
+                    'write': 'write',
+                    'swim': 'swim',
+                    'fly': 'fly',
+                    'supergirl': 'supergirl',
+                    'ride': 'ride a bicycle',
+                    'slide': 'slide',
+                    'bear': 'teddy bear',
+                    'chair': 'chair',
+                    'box': 'box',
+                    'bowl': 'bowl',
+                    'chopsticks': 'chopsticks',
+                    'ruler': 'ruler',
+                    'pencil': 'pencil',
+                    'sun': 'sun',
+                    'moon': 'moon',
+                    'star': 'star',
+                    'fox': 'fox',
+                    'hippo': 'hippo',
+                    'rabbit': 'rabbit',
+                    'monkey': 'monkey',
+                    'bee': 'bee',
+                    'one': 'one',
+                    'two': 'two',
+                    'three': 'three',
+                    'four': 'four',
+                    'five': 'five',
+                    'six': 'six',
+                    'seven': 'seven',
+                    'eight': 'eight',
+                    'nine': 'nine',
+                    'ten': 'ten',
+                    'white': 'white',
+                    'purple': 'purple',
+                    'pink': 'pink',
+                    'orange': 'orange',
+                    'brown': 'brown',
+                    'black': 'black',
+                    // 新增单词
+                    'red': 'red',
+                    'green': 'green',
+                    'yellow': 'yellow',
+                    'blue': 'blue',
+                    'teacher': 'teacher',
+                    'student': 'student',
+                    'jump': 'jump',
+                    'climb': 'climb',
+                    'sing': 'sing',
+                    'dance': 'dance',
+                    'read': 'read',
+                    'eat': 'eat',
+                    'desk': 'desk',
+                    'book': 'book',
+                    'pen': 'pen',
+                    'bag': 'bag',
+                    'rubber': 'rubber',
+                    'sharpener': 'sharpener',
+                    'tree': 'tree',
+                    'flower': 'flower',
+                    'grass': 'grass',
+                    'bird': 'bird',
+                    'butterfly': 'butterfly',
+                    'cloud': 'cloud'
+                };
+                
+                const text = wordMap[word] || word;
+                speakText(text);
+            }
+            
+            // 朗读文本
+            function speakText(text) {
+                if (!speechSupported) {
+                    feedbackEl.textContent = "当前环境不支持语音功能";
+                    feedbackEl.className = "feedback incorrect";
+                    return;
+                }
+                
+                try {
+                    // 取消当前正在播放的语音
+                    window.speechSynthesis.cancel();
+                    isSpeaking = false;
+                    
+                    const utterance = new SpeechSynthesisUtterance(text);
+                    utterance.lang = 'en-US';
+                    utterance.rate = 0.9;
+                    utterance.pitch = 1.2;
+                    
+                    // 开始语音播放
+                    isSpeaking = true;
+                    voiceStatus.classList.add('speaking');
+                    voiceAnimation.style.display = 'flex';
+                    
+                    utterance.onend = function() {
+                        isSpeaking = false;
+                        voiceStatus.classList.remove('speaking');
+                        voiceAnimation.style.display = 'none';
+                    };
+                    
+                    utterance.onerror = function(event) {
+                        console.error("语音播放错误:", event);
+                        isSpeaking = false;
+                        voiceStatus.classList.remove('speaking');
+                        voiceAnimation.style.display = 'none';
+                        feedbackEl.textContent = "语音播放失败，请检查设置";
+                        feedbackEl.className = "feedback incorrect";
+                    };
+                    
+                    window.speechSynthesis.speak(utterance);
+                } catch (e) {
+                    console.error("语音合成错误:", e);
+                    feedbackEl.textContent = "语音功能不可用，请在浏览器中打开";
+                    feedbackEl.className = "feedback incorrect";
+                }
+            }
+            
+            // 启动游戏
+            initGame();
+        });
+    </script>
+</body>
+</html>
